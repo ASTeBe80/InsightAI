@@ -3,8 +3,6 @@
 ## 1. Project Overview
 InsightAI is a Python-based application that analyzes stock market trends and news sentiment. It uses the **Gemini AI API** for summarization and prediction, the **Alpha Vantage API** for stock market data, and **Matplotlib** for visualization. The application features a GUI built with **Tkinter** and generates **downloadable HTML reports** with insights and graphs.
 
-Here’s the **updated Installation & Setup** section for your documentation, reflecting that your project is now on GitHub.
-
 ---
 
 ## **2. Installation & Setup**  
@@ -65,17 +63,7 @@ Here’s the **updated Installation & Setup** section for your documentation, re
 - Used for **stock market data retrieval**.
 - Requires a **free API key** from [Alpha Vantage](https://www.alphavantage.co/).
 
-## 6. Code Structure
-```
-InsightAI/
-│── main.py  # Main GUI and application logic
-│── .env  # API keys (not to be shared)
-│── InsightAI logo.jpg  # Project logo
-│── Documentation.md  # Project documentation
-│── Presentation.pptx  # Project presentation
-```
-
-## 7. Future Improvements
+## 6. Future Improvements
 - ✅ Add **user authentication** to track individual reports.
 - ✅ Enable **multi-stock analysis** based on user input.
 - ✅ Implement **email-based report delivery**.
@@ -84,3 +72,4 @@ InsightAI/
 ---
 📌 **Developed by:** Ashutosh Singh  
 📌 **Version:** 1.0
+📌 **License:** MIT
