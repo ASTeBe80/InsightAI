@@ -3,25 +3,42 @@
 ## 1. Project Overview
 InsightAI is a Python-based application that analyzes stock market trends and news sentiment. It uses the **Gemini AI API** for summarization and prediction, the **Alpha Vantage API** for stock market data, and **Matplotlib** for visualization. The application features a GUI built with **Tkinter** and generates **downloadable HTML reports** with insights and graphs.
 
-## 2. Installation & Setup
-### Prerequisites:
-- Python 3.x
-- Required libraries (install via pip):
-  ```sh
-  pip install requests google-generativeai matplotlib numpy pillow tkinter python-dotenv
-  ```
+Here’s the **updated Installation & Setup** section for your documentation, reflecting that your project is now on GitHub.
 
-### Setup:
-1. Download or clone the project files and navigate to the project directory.
-2. Create a `.env` file in the same directory as `main.py` and add your API keys:
+---
+
+## **2. Installation & Setup**  
+
+### **Prerequisites:**  
+- Python 3.x  
+- Required libraries (install via pip):  
+  ```sh
+  pip install -r requirements.txt
+  ```  
+
+### **Setup:**  
+1. **Clone the repository** from GitHub:  
    ```sh
-   GEMINI_API_KEY=your_gemini_api_key
-   ALPHA_VANTAGE_API_KEY=your_alpha_vantage_api_key
-   ```
-3. Run the application:
+   git clone https://github.com/ASTeBe80/InsightAI.git
+   cd InsightAI
+   ```  
+2. **Install dependencies**:  
+   ```sh
+   pip install -r requirements.txt
+   ```  
+3. **Set up API keys**:  
+   - Create a `.env` file in the project root.  
+   - Add your API keys:  
+     ```sh
+     GEMINI_API_KEY=your_gemini_api_key
+     ALPHA_VANTAGE_API_KEY=your_alpha_vantage_api_key
+     ```  
+4. **Run the application**:  
    ```sh
    python main.py
    ```
+
+---
 
 ## 3. How It Works
 1. The user enters a **news URL** in the GUI.
