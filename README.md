@@ -29,11 +29,19 @@ InsightAI is a Python-based application that analyzes stock market trends and ne
    - Add your API keys:  
      ```sh
      GEMINI_API_KEY=your_gemini_api_key
+     GEMINI_API_KEY2=your_gemini_api_key
+     GEMINI_API_KEY3=your_gemini_api_key
+     GEMINI_API_KEY4=your_gemini_api_key
+
      ALPHA_VANTAGE_API_KEY=your_alpha_vantage_api_key
+
+      OPENAI_API_KEY = your_openai_api_key
+      OPENAI_API_KEY2 = your_openai_api_key
+      OPENAI_API_KEY3 = your_openai_api_key
      ```  
 4. **Run the application**:  
    ```sh
-   python main.py
+   python openaimain.py
    ```
 
 ---
