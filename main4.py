@@ -2,15 +2,14 @@ import os
 import requests
 import google.generativeai as genai
 import matplotlib.pyplot as plt
-import numpy as np
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import messagebox
 from dotenv import load_dotenv
 from PIL import Image, ImageTk
 
 # Load API keys
 load_dotenv()
-gemini_api_key = os.getenv("GEMINI_API_KEY2")
+gemini_api_key = os.getenv("GEMINI_API_KEY3")  # Update the environment variable name if needed
 alpha_vantage_api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
 
 genai.configure(api_key=gemini_api_key)
@@ -19,13 +18,16 @@ genai.configure(api_key=gemini_api_key)
 logo_path = "C:\\Users\\HP\\OneDrive\\Desktop\\InsightAI v1.0\\InsightAI logo.jpg"
 
 def fetch_news_summary(news_url):
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("gemini-pro")  # Ensure this model is available
     sys_prompt = f"""
         Summarize the news article from the following URL in 4-5 lines.
         URL: {news_url}
     """
-    response = model.generate_content(sys_prompt)
-    return response.text.strip() if hasattr(response, "text") and response.text else "Error generating summary."
+    try:
+        response = model.generate_content(sys_prompt)
+        return response.text.strip() if hasattr(response, "text") and response.text else "Error generating summary."
+    except Exception as e:
+        return f"Error fetching news summary: {e}"
 
 def fetch_stock_data():
     url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&apikey={alpha_vantage_api_key}"
@@ -36,14 +38,17 @@ def fetch_stock_data():
     return None
 
 def analyze_market_reaction(stock_data, news_url):
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("gemini-pro")  # Ensure this model is available
     sys_prompt = f"""
         Analyze the following stock market data and predict how the market will react based on recent trends in News.
         Data: {stock_data}
         News: {news_url}
     """
-    response = model.generate_content(sys_prompt)
-    return response.text.strip() if hasattr(response, "text") and response.text else "Error generating analysis."
+    try:
+        response = model.generate_content(sys_prompt)
+        return response.text.strip() if hasattr(response, "text") and response.text else "Error generating analysis."
+    except Exception as e:
+        return f"Error analyzing market reaction: {e}"
 
 def plot_stock_graph(stock_data):
     dates = list(stock_data.keys())[:30][::-1]
@@ -60,6 +65,7 @@ def plot_stock_graph(stock_data):
     downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
     graph_path = os.path.join(downloads_folder, "stock_graph.png")
     plt.savefig(graph_path)
+    plt.close()  # Close the plot to free up memory
     return graph_path
 
 def get_unique_filename(base_path):

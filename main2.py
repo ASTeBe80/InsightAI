@@ -18,14 +18,26 @@ genai.configure(api_key=gemini_api_key)
 # Logo Path
 logo_path = "C:\\Users\\HP\\OneDrive\\Desktop\\InsightAI v1.0\\InsightAI logo.jpg"
 
+def list_available_models():
+    model = genai.GenerativeModel()
+    try:
+        models = model.list_models()
+        return [m.name for m in models]
+    except Exception as e:
+        print(f"Error listing models: {e}")
+        return []
+
 def fetch_news_summary(news_url):
     model = genai.GenerativeModel("gemini-pro")
     sys_prompt = f"""
         Summarize the news article from the following URL in 4-5 lines.
         URL: {news_url}
     """
-    response = model.generate_content(sys_prompt)
-    return response.text.strip() if hasattr(response, "text") and response.text else "Error generating summary."
+    try:
+        response = model.generate_content(sys_prompt)
+        return response.text.strip() if hasattr(response, "text") and response.text else "Error generating summary."
+    except Exception as e:
+        return f"Error fetching news summary: {e}"
 
 def fetch_stock_data():
     url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&apikey={alpha_vantage_api_key}"
@@ -42,8 +54,11 @@ def analyze_market_reaction(stock_data, news_url):
         Data: {stock_data}
         News: {news_url}
     """
-    response = model.generate_content(sys_prompt)
-    return response.text.strip() if hasattr(response, "text") and response.text else "Error generating analysis."
+    try:
+        response = model.generate_content(sys_prompt)
+        return response.text.strip() if hasattr(response, "text") and response.text else "Error generating analysis."
+    except Exception as e:
+        return f"Error analyzing market reaction: {e}"
 
 def plot_stock_graph(stock_data):
     dates = list(stock_data.keys())[:30][::-1]
@@ -60,6 +75,7 @@ def plot_stock_graph(stock_data):
     downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
     graph_path = os.path.join(downloads_folder, "stock_graph.png")
     plt.savefig(graph_path)
+    plt.close()  # Close the plot to free up memory
     return graph_path
 
 def get_unique_filename(base_path):
@@ -142,5 +158,9 @@ url_entry = tk.Entry(root, width=50)
 url_entry.pack(pady=5)
 
 tk.Button(root, text="Generate Report", command=run_analysis, bg="#bb86fc", fg="white").pack(pady=20)
+
+# List available models (for debugging)
+available_models = list_available_models()
+print("Available models:", available_models)
 
 root.mainloop()
